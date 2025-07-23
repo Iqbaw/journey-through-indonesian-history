@@ -1,0 +1,390 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Inter', 'Noto Sans Javanese', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    background: linear-gradient(to bottom, 
+        #8B4513 0%,      /* Ancient earth - Singhasari */
+        #CD853F 15%,     /* Majapahit gold */
+        #228B22 30%,     /* Islamic green */
+        #8B0000 45%,     /* Colonial struggle red */
+        #FF4500 60%,     /* Revolutionary orange */
+        #FFD700 75%,     /* Independence gold */
+        #FF6347 90%,     /* Modern Indonesia red-white */
+        #DC143C 100%     /* Present day */
+    );
+    color: #ffffff;
+    overflow-x: hidden;
+    min-height: 100vh;
+}
+
+/* Era-specific background layers */
+.timeline-container {
+    position: relative;
+    width: 100%;
+    min-height: 600vh;
+}
+
+.timeline-container::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: 
+        radial-gradient(circle at 20% 20%, rgba(139, 69, 19, 0.3) 0%, transparent 50%),
+        radial-gradient(circle at 80% 40%, rgba(205, 133, 63, 0.3) 0%, transparent 50%),
+        radial-gradient(circle at 30% 60%, rgba(34, 139, 34, 0.3) 0%, transparent 50%),
+        radial-gradient(circle at 70% 80%, rgba(255, 69, 0, 0.3) 0%, transparent 50%);
+    z-index: -1;
+    animation: parallax 20s ease-in-out infinite;
+}
+
+@keyframes parallax {
+    0%, 100% { transform: translateY(0px); }
+    50% { transform: translateY(-20px); }
+}
+
+.intro-section {
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 2rem;
+    background: linear-gradient(135deg, rgba(139, 69, 19, 0.8), rgba(205, 133, 63, 0.6));
+    backdrop-filter: blur(10px);
+}
+
+.intro-section h1 {
+    font-size: 4rem;
+    font-weight: 700;
+    margin-bottom: 1rem;
+    text-shadow: 0 0 20px rgba(205, 133, 63, 0.8);
+    animation: float 3s ease-in-out infinite;
+    font-family: 'Noto Sans Javanese', serif;
+}
+
+@keyframes float {
+    0%, 100% { transform: translateY(0px); }
+    50% { transform: translateY(-10px); }
+}
+
+.intro-text {
+    font-size: 1.5rem;
+    opacity: 0.9;
+    animation: fadeIn 2s ease-in;
+    max-width: 600px;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 0.9; }
+}
+
+.historical-content {
+    padding: 2rem;
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+.era {
+    margin-bottom: 100vh;
+    padding: 4rem 3rem;
+    border-radius: 25px;
+    backdrop-filter: blur(15px);
+    border: 2px solid rgba(255, 255, 255, 0.2);
+    transition: all 0.4s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+/* Era-specific styling */
+.era[data-era="singhasari"] {
+    background: linear-gradient(135deg, rgba(139, 69, 19, 0.7), rgba(160, 82, 45, 0.5));
+    box-shadow: 0 20px 40px rgba(139, 69, 19, 0.3);
+}
+
+.era[data-era="majapahit"] {
+    background: linear-gradient(135deg, rgba(205, 133, 63, 0.7), rgba(218, 165, 32, 0.5));
+    box-shadow: 0 20px 40px rgba(205, 133, 63, 0.3);
+}
+
+.era[data-era="islamic"] {
+    background: linear-gradient(135deg, rgba(34, 139, 34, 0.7), rgba(0, 100, 0, 0.5));
+    box-shadow: 0 20px 40px rgba(34, 139, 34, 0.3);
+}
+
+.era[data-era="colonial"] {
+    background: linear-gradient(135deg, rgba(139, 0, 0, 0.7), rgba(128, 0, 0, 0.5));
+    box-shadow: 0 20px 40px rgba(139, 0, 0, 0.3);
+}
+
+.era[data-era="awakening"] {
+    background: linear-gradient(135deg, rgba(255, 69, 0, 0.7), rgba(255, 140, 0, 0.5));
+    box-shadow: 0 20px 40px rgba(255, 69, 0, 0.3);
+}
+
+.era[data-era="modern"] {
+    background: linear-gradient(135deg, rgba(255, 215, 0, 0.7), rgba(255, 99, 71, 0.5));
+    box-shadow: 0 20px 40px rgba(255, 215, 0, 0.3);
+}
+
+.era:hover {
+    transform: translateY(-10px) scale(1.02);
+    box-shadow: 0 30px 60px rgba(255, 255, 255, 0.1);
+}
+
+.era-info h2 {
+    font-size: 2.8rem;
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+    text-shadow: 0 0 15px rgba(255, 255, 255, 0.5);
+    font-family: 'Noto Sans Javanese', serif;
+}
+
+.era-info p {
+    font-size: 1.3rem;
+    opacity: 0.9;
+    margin-bottom: 0.5rem;
+}
+
+.era-description {
+    font-size: 1.1rem;
+    line-height: 1.7;
+    opacity: 0.8;
+    margin-bottom: 2.5rem;
+}
+
+.historical-figures {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 2rem;
+    margin-top: 3rem;
+}
+
+.historical-figure {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+    padding: 2rem;
+    background: rgba(255, 255, 255, 0.15);
+    border-radius: 20px;
+    transition: all 0.4s ease;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    backdrop-filter: blur(10px);
+}
+
+.historical-figure:hover {
+    background: rgba(255, 255, 255, 0.25);
+    transform: scale(1.05) translateY(-5px);
+    box-shadow: 0 15px 35px rgba(255, 255, 255, 0.2);
+}
+
+.figure-visual {
+    font-size: 3.5rem;
+    width: 90px;
+    height: 90px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(0, 0, 0, 0.3);
+    border-radius: 50%;
+    flex-shrink: 0;
+    transition: all 0.3s ease;
+}
+
+.historical-figure:hover .figure-visual {
+    transform: scale(1.1);
+    background: rgba(255, 255, 255, 0.2);
+}
+
+.figure-info h3 {
+    font-size: 1.4rem;
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+    color: #ffffff;
+}
+
+.figure-info p {
+    font-size: 1rem;
+    opacity: 0.85;
+    line-height: 1.5;
+}
+
+.year-indicator {
+    position: fixed;
+    top: 2rem;
+    right: 2rem;
+    background: rgba(0, 0, 0, 0.8);
+    padding: 1rem 1.5rem;
+    border-radius: 50px;
+    font-size: 1.6rem;
+    font-weight: 700;
+    z-index: 1000;
+    backdrop-filter: blur(15px);
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+}
+
+.era-label {
+    position: fixed;
+    top: 2rem;
+    left: 2rem;
+    background: rgba(0, 0, 0, 0.8);
+    padding: 1rem 1.5rem;
+    border-radius: 50px;
+    font-size: 1.3rem;
+    font-weight: 600;
+    z-index: 1000;
+    backdrop-filter: blur(15px);
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+    font-family: 'Noto Sans Javanese', serif;
+}
+
+.final-message {
+    text-align: center;
+    padding: 5rem 2rem;
+    margin-top: 50vh;
+    background: linear-gradient(135deg, rgba(220, 20, 60, 0.8), rgba(255, 99, 71, 0.6));
+    border-radius: 30px;
+    backdrop-filter: blur(20px);
+    border: 2px solid rgba(255, 255, 255, 0.3);
+}
+
+.final-message h2 {
+    font-size: 3.5rem;
+    margin-bottom: 1rem;
+    color: #FFD700;
+    text-shadow: 0 0 20px rgba(255, 215, 0, 0.8);
+    font-family: 'Noto Sans Javanese', serif;
+}
+
+.final-message p {
+    font-size: 1.6rem;
+    opacity: 0.9;
+    margin-bottom: 1rem;
+}
+
+.year-final {
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: #FF6347;
+    text-shadow: 0 0 15px rgba(255, 99, 71, 0.8);
+}
+
+.indonesia-motto {
+    font-size: 1.4rem;
+    font-style: italic;
+    color: #FFD700;
+    font-family: 'Noto Sans Javanese', serif;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .intro-section h1 {
+        font-size: 2.8rem;
+    }
+    
+    .intro-text {
+        font-size: 1.2rem;
+    }
+    
+    .era {
+        padding: 2.5rem 2rem;
+        margin-bottom: 80vh;
+    }
+    
+    .era-info h2 {
+        font-size: 2.2rem;
+    }
+    
+    .era-info p {
+        font-size: 1.1rem;
+    }
+    
+    .era-description {
+        font-size: 1rem;
+    }
+    
+    .historical-figures {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+    }
+    
+    .historical-figure {
+        flex-direction: column;
+        text-align: center;
+        padding: 1.5rem;
+    }
+    
+    .year-indicator,
+    .era-label {
+        font-size: 1.1rem;
+        padding: 0.8rem 1.2rem;
+    }
+    
+    .final-message h2 {
+        font-size: 2.5rem;
+    }
+    
+    .final-message p {
+        font-size: 1.3rem;
+    }
+}
+
+/* Smooth scrolling */
+html {
+    scroll-behavior: smooth;
+}
+
+/* Custom scrollbar with Indonesian colors */
+::-webkit-scrollbar {
+    width: 10px;
+}
+
+::-webkit-scrollbar-track {
+    background: rgba(0, 0, 0, 0.2);
+}
+
+::-webkit-scrollbar-thumb {
+    background: linear-gradient(to bottom, #FF6347, #FFD700);
+    border-radius: 5px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: linear-gradient(to bottom, #FF4500, #FFA500);
+}
+
+/* Parallax background layers */
+.parallax-layer {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: -2;
+}
+
+.parallax-layer-1 {
+    background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><circle cx="20" cy="20" r="1" fill="rgba(255,255,255,0.1)"/><circle cx="80" cy="40" r="1" fill="rgba(255,255,255,0.1)"/><circle cx="40" cy="80" r="1" fill="rgba(255,255,255,0.1)"/></svg>');
+    animation: float 25s ease-in-out infinite;
+}
+
+.parallax-layer-2 {
+    background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><path d="M10,50 Q30,10 50,50 T90,50" stroke="rgba(255,255,255,0.05)" stroke-width="0.5" fill="none"/></svg>');
+    animation: float 30s ease-in-out infinite reverse;
+}
+
+@keyframes float {
+    0%, 100% { transform: translateY(0px) translateX(0px); }
+    33% { transform: translateY(-10px) translateX(5px); }
+    66% { transform: translateY(5px) translateX(-5px); }
+}
