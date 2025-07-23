@@ -1,8 +1,4 @@
 
-Built by https://www.blackbox.ai
-
----
-
 # Journey Through Indonesian History - 2025
 
 ## Project Overview
