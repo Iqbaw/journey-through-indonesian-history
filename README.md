@@ -50,7 +50,7 @@ journey-through-indonesian-history/
 ```
 
 ## Author
-Created by [Your Name](https://github.com/yourusername) - Feel free to reach out for any inquiries or collaboration opportunities!
+Created by [iqbal](https://github.com/iqbaw) - Feel free to reach out for any inquiries or collaboration opportunities!
 
 ## License
 This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
