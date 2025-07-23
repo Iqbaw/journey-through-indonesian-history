@@ -1,0 +1,508 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Inter', 'Noto Sans Javanese', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    background: linear-gradient(to bottom, 
+        #8B4513 0%,      /* Ancient earth - Singhasari */
+        #CD853F 15%,     /* Majapahit gold */
+        #228B22 30%,     /* Islamic green */
+        #8B0000 45%,     /* Colonial struggle red */
+        #FF4500 60%,     /* Revolutionary orange */
+        #FFD700 75%,     /* Independence gold */
+        #FF6347 90%,     /* Modern Indonesia red-white */
+        #DC143C 100%     /* Present day */
+    );
+    color: #ffffff;
+    overflow-x: hidden;
+    min-height: 100vh;
+    line-height: 1.6;
+}
+
+/* Container structure */
+.timeline-container {
+    position: relative;
+    width: 100%;
+    min-height: 600vh;
+}
+
+.intro-section {
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 2rem;
+    background: linear-gradient(135deg, rgba(139, 69, 19, 0.9), rgba(160, 82, 45, 0.7));
+    backdrop-filter: blur(10px);
+}
+
+.intro-section h1 {
+    font-size: clamp(2rem, 5vw, 3.5rem);
+    font-weight: 700;
+    margin-bottom: 1rem;
+    text-shadow: 0 0 15px rgba(205, 133, 63, 0.8);
+    font-family: 'Noto Sans Javanese', serif;
+    line-height: 1.2;
+}
+
+.intro-text {
+    font-size: clamp(1rem, 2.5vw, 1.4rem);
+    opacity: 0.9;
+    max-width: 600px;
+    line-height: 1.7;
+}
+
+.historical-content {
+    padding: 2rem 1rem;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.era {
+    margin-bottom: 100vh;
+    padding: 3rem 2.5rem;
+    border-radius: 25px;
+    backdrop-filter: blur(15px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    transition: all 0.3s ease;
+    min-height: 60vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin-left: auto;
+    margin-right: auto;
+    max-width: 900px;
+}
+
+/* Era backgrounds */
+.era[data-era="singhasari"] {
+    background: linear-gradient(135deg, rgba(139, 69, 19, 0.85), rgba(160, 82, 45, 0.65));
+}
+
+.era[data-era="majapahit"] {
+    background: linear-gradient(135deg, rgba(205, 133, 63, 0.85), rgba(218, 165, 32, 0.65));
+}
+
+.era[data-era="islamic"] {
+    background: linear-gradient(135deg, rgba(34, 139, 34, 0.85), rgba(0, 100, 0, 0.65));
+}
+
+.era[data-era="colonial"] {
+    background: linear-gradient(135deg, rgba(139, 0, 0, 0.85), rgba(128, 0, 0, 0.65));
+}
+
+.era[data-era="awakening"] {
+    background: linear-gradient(135deg, rgba(255, 69, 0, 0.85), rgba(255, 140, 0, 0.65));
+}
+
+.era[data-era="modern"] {
+    background: linear-gradient(135deg, rgba(255, 215, 0, 0.85), rgba(255, 99, 71, 0.65));
+}
+
+.era-info {
+    margin-bottom: 2.5rem;
+    text-align: center;
+}
+
+.era-info h2 {
+    font-size: clamp(1.8rem, 4vw, 2.5rem);
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+    text-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+    font-family: 'Noto Sans Javanese', serif;
+}
+
+.era-info p {
+    font-size: clamp(1.1rem, 2.5vw, 1.3rem);
+    opacity: 0.9;
+    margin-bottom: 0.5rem;
+}
+
+.era-description {
+    font-size: clamp(0.9rem, 2vw, 1.1rem);
+    line-height: 1.7;
+    opacity: 0.85;
+    margin-bottom: 2rem;
+    max-width: 700px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.historical-figures {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+    margin-top: 2.5rem;
+}
+
+.historical-figure {
+    display: flex;
+    align-items: flex-start;
+    gap: 1.5rem;
+    padding: 2rem;
+    background: rgba(255, 255, 255, 0.15);
+    border-radius: 20px;
+    transition: all 0.3s ease;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.historical-figure:hover {
+    background: rgba(255, 255, 255, 0.25);
+    transform: translateY(-3px);
+}
+
+.figure-visual {
+    font-size: clamp(2rem, 4vw, 3rem);
+    width: 70px;
+    height: 70px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(0, 0, 0, 0.2);
+    border-radius: 50%;
+    flex-shrink: 0;
+}
+
+.figure-info {
+    flex: 1;
+    min-width: 0;
+}
+
+.figure-info h3 {
+    font-size: clamp(1rem, 2.5vw, 1.3rem);
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+    color: #ffffff;
+}
+
+.figure-info p {
+    font-size: clamp(0.85rem, 2vw, 1rem);
+    opacity: 0.9;
+    line-height: 1.5;
+}
+
+.year-indicator {
+    position: fixed;
+    top: 1.5rem;
+    right: 1.5rem;
+    background: rgba(0, 0, 0, 0.8);
+    padding: 1rem 1.5rem;
+    border-radius: 50px;
+    font-size: clamp(1.1rem, 3vw, 1.5rem);
+    font-weight: 700;
+    z-index: 1000;
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    min-width: 100px;
+    text-align: center;
+}
+
+.era-label {
+    position: fixed;
+    top: 1.5rem;
+    left: 1.5rem;
+    background: rgba(0, 0, 0, 0.8);
+    padding: 1rem 1.5rem;
+    border-radius: 50px;
+    font-size: clamp(0.9rem, 2.5vw, 1.2rem);
+    font-weight: 600;
+    z-index: 1000;
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    font-family: 'Noto Sans Javanese', serif;
+    max-width: 200px;
+    text-align: center;
+}
+
+.final-message {
+    text-align: center;
+    padding: 4rem 2rem;
+    margin-top: 50vh;
+    background: linear-gradient(135deg, rgba(220, 20, 60, 0.9), rgba(255, 99, 71, 0.7));
+    border-radius: 30px;
+    backdrop-filter: blur(15px);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    max-width: 700px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.final-message h2 {
+    font-size: clamp(2rem, 5vw, 3rem);
+    margin-bottom: 1rem;
+    color: #FFD700;
+    text-shadow: 0 0 15px rgba(255, 215, 0, 0.8);
+    font-family: 'Noto Sans Javanese', serif;
+}
+
+.final-message p {
+    font-size: clamp(1.1rem, 3vw, 1.5rem);
+    opacity: 0.95;
+    margin-bottom: 1rem;
+}
+
+.year-final {
+    font-size: clamp(1.5rem, 4vw, 2.2rem);
+    font-weight: 700;
+    color: #FF6347;
+    text-shadow: 0 0 15px rgba(255, 99, 71, 0.8);
+}
+
+.indonesia-motto {
+    font-size: clamp(1rem, 2.5vw, 1.3rem);
+    font-style: italic;
+    color: #FFD700;
+    font-family: 'Noto Sans Javanese', serif;
+}
+
+.independence-greeting {
+    text-align: center;
+    padding: 5rem 2rem;
+    margin-top: 5rem;
+    background: linear-gradient(135deg, rgba(220, 20, 60, 0.95), rgba(255, 255, 255, 0.9));
+    border-radius: 40px;
+    backdrop-filter: blur(20px);
+    border: 3px solid rgba(220, 20, 60, 0.5);
+    max-width: 800px;
+    margin-left: auto;
+    margin-right: auto;
+    box-shadow: 0 20px 60px rgba(220, 20, 60, 0.3);
+}
+
+.independence-greeting h2 {
+    font-size: clamp(2.5rem, 6vw, 4rem);
+    margin-bottom: 1.5rem;
+    color: #DC143C;
+    text-shadow: 0 0 20px rgba(220, 20, 60, 0.8);
+    font-family: 'Noto Sans Javanese', serif;
+    font-weight: 700;
+    line-height: 1.2;
+}
+
+.hut-ri {
+    font-size: clamp(1.8rem, 4.5vw, 2.8rem);
+    font-weight: 700;
+    color: #FFFFFF;
+    text-shadow: 0 0 15px rgba(220, 20, 60, 0.9);
+    margin-bottom: 1rem;
+    font-family: 'Noto Sans Javanese', serif;
+}
+
+.independence-year {
+    font-size: clamp(1.3rem, 3.5vw, 2rem);
+    color: #DC143C;
+    font-weight: 600;
+    margin-bottom: 1.5rem;
+    text-shadow: 0 0 10px rgba(255, 255, 255, 0.8);
+}
+
+.merdeka-text {
+    font-size: clamp(2rem, 5vw, 3.5rem);
+    font-weight: 900;
+    color: #DC143C;
+    text-shadow: 0 0 25px rgba(220, 20, 60, 1);
+    letter-spacing: 0.2em;
+    font-family: 'Noto Sans Javanese', serif;
+    animation: pulse 2s ease-in-out infinite;
+}
+
+@keyframes pulse {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.05); }
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .intro-section {
+        padding: 1.5rem 1rem;
+    }
+    
+    .intro-section h1 {
+        font-size: clamp(1.8rem, 7vw, 2.5rem);
+    }
+    
+    .intro-text {
+        font-size: clamp(0.9rem, 4vw, 1.2rem);
+    }
+    
+    .historical-content {
+        padding: 1rem 0.5rem;
+    }
+    
+    .era {
+        padding: 2rem 1.5rem;
+        margin-bottom: 80vh;
+        margin-left: 0.5rem;
+        margin-right: 0.5rem;
+    }
+    
+    .era-info h2 {
+        font-size: clamp(1.6rem, 6vw, 2rem);
+    }
+    
+    .era-description {
+        font-size: clamp(0.85rem, 3.5vw, 1rem);
+    }
+    
+    .historical-figures {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+    }
+    
+    .historical-figure {
+        flex-direction: column;
+        text-align: center;
+        padding: 1.5rem;
+        gap: 1rem;
+    }
+    
+    .figure-visual {
+        font-size: clamp(1.8rem, 7vw, 2.5rem);
+        width: 60px;
+        height: 60px;
+    }
+    
+    .figure-info h3 {
+        font-size: clamp(0.95rem, 4.5vw, 1.1rem);
+    }
+    
+    .figure-info p {
+        font-size: clamp(0.8rem, 3.5vw, 0.9rem);
+    }
+    
+    .year-indicator,
+    .era-label {
+        font-size: clamp(0.85rem, 3.5vw, 1.1rem);
+        padding: 0.8rem 1.2rem;
+        position: fixed;
+        top: 1rem;
+    }
+    
+    .year-indicator {
+        right: 1rem;
+        min-width: 80px;
+    }
+    
+    .era-label {
+        left: 1rem;
+        max-width: 150px;
+    }
+    
+    .final-message {
+        padding: 3rem 1.5rem;
+        margin: 40vh 0.5rem 0;
+    }
+    
+    .final-message h2 {
+        font-size: clamp(1.6rem, 6vw, 2.2rem);
+    }
+    
+    .final-message p {
+        font-size: clamp(0.9rem, 4vw, 1.2rem);
+    }
+    
+    .independence-greeting {
+        padding: 3rem 1.5rem;
+        margin: 3rem 0.5rem 0;
+    }
+    
+    .independence-greeting h2 {
+        font-size: clamp(2rem, 8vw, 3rem);
+    }
+    
+    .hut-ri {
+        font-size: clamp(1.5rem, 6vw, 2.2rem);
+    }
+    
+    .independence-year {
+        font-size: clamp(1.1rem, 4.5vw, 1.6rem);
+    }
+    
+    .merdeka-text {
+        font-size: clamp(1.8rem, 7vw, 2.8rem);
+    }
+}
+
+@media (max-width: 480px) {
+    .era {
+        padding: 1.5rem 1rem;
+        margin-bottom: 70vh;
+    }
+    
+    .historical-figures {
+        gap: 1rem;
+    }
+    
+    .historical-figure {
+        padding: 1.2rem;
+    }
+    
+    .independence-greeting {
+        padding: 2rem 1rem;
+        margin: 2rem 0.25rem 0;
+    }
+    
+    .independence-greeting h2 {
+        font-size: clamp(1.6rem, 9vw, 2.5rem);
+    }
+    
+    .hut-ri {
+        font-size: clamp(1.2rem, 7vw, 1.8rem);
+    }
+    
+    .independence-year {
+        font-size: clamp(1rem, 5vw, 1.3rem);
+    }
+    
+    .merdeka-text {
+        font-size: clamp(1.5rem, 8vw, 2.2rem);
+        letter-spacing: 0.1em;
+    }
+}
+
+/* Smooth scrolling */
+html {
+    scroll-behavior: smooth;
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+    width: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: rgba(0, 0, 0, 0.2);
+}
+
+::-webkit-scrollbar-thumb {
+    background: linear-gradient(to bottom, #FF6347, #FFD700);
+    border-radius: 4px;
+}
+
+/* Fade-in animations - no parallax to prevent overlap */
+.era {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 0.6s ease, transform 0.6s ease;
+}
+
+.era.fade-in {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.historical-figure {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.5s ease, transform 0.5s ease;
+}
+
+.historical-figure.fade-in {
+    opacity: 1;
+    transform: translateY(0);
+}
